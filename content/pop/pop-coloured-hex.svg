@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="125px" height="108px" viewBox="0 0 125 108" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>PoP Multi-coloured hex</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="PoP-Multi-coloured-hex" fill-rule="nonzero">
+            <polygon id="Shape" fill="#45D8FF" points="93.3 0.4 31.6 0.4 62.4 53.9"></polygon>
+            <polygon id="Shape" fill="#63E54C" points="93.3 107.4 31.6 107.4 0.7 53.9"></polygon>
+            <polygon id="Shape" fill="#FFE000" points="31.6 0.4 0.7 53.9 93.3 107.4"></polygon>
+            <polygon id="Shape" fill="#FF5072" points="93.3 0.4 62.4 53.9 93.3 107.4 124.2 53.9"></polygon>
+        </g>
+    </g>
+</svg>

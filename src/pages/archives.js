@@ -1,6 +1,9 @@
 import { graphql, Link } from "gatsby"
 import React from "react"
 import style from "./style.css"
+
+// import Post from '../templates/post/post'
+// import Meta from '../components/meta/meta'
 import Layout from "../components/layout"
 import Jumbotron from "../components/jumbotron"
 
@@ -11,8 +14,10 @@ const Index = ({ data, location }) => {
   return (
     <Layout location={location}>
       <Jumbotron title="What is the sound of mind at rest?" />
-      <p className="lead">Projects and Activities</p>
-      <Link to="/proof-of-process" >Proof of Process</Link>
+      <div className="row">
+        <div className="col">This is one way ag</div>
+        <div className="col">This is the other</div>
+      </div>
       {posts.map((post, i) => (
         <Link to={post.node.slug}>
         <div key={i}>{post.node.frontmatter.title}</div>
