@@ -10,7 +10,7 @@ const Index = ({ data, location }) => {
 
   return (
     <Layout location={location}>
-      <Jumbotron title="What is the sound of mind at rest?" />
+      <Jumbotron  className={style.jumbotron} title="What is the sound of mind at rest?" />
       <p className="lead">Projects and Activities</p>
       <Link to="/proof-of-process" >Proof of Process</Link>
       {posts.map((post, i) => (

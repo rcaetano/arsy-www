@@ -9,7 +9,7 @@ const Index = ({ data, location }) => {
   console.log(posts)
 
   return (
-    <Layout location={location}>
+    <Layout location={location} className={style}>
       <Jumbotron title="Proof of Process" />
       <h3>Table of Contents</h3>
       <p class="lead">
@@ -19,9 +19,9 @@ const Index = ({ data, location }) => {
         Caetano.
       </p>
       <ol>
-        {posts.map((post, i) => (
+        {posts.slice(0, 10).map((post, i) => (
           <li>
-            <Link to={post.node.slug}>
+            <Link to={"/proof-of-process/" + post.node.slug}>
               <div key={i}>{post.node.title}</div>
             </Link>
           </li>

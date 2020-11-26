@@ -1,50 +1,61 @@
-const _ = require(`lodash`)
-const path = require(`path`)
-const { slash } = require(`gatsby-core-utils`)
+const Promise = require("bluebird")
+const path = require("path")
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
+exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
-  // The “graphql” function allows us to run arbitrary
-  // queries against the local Contentful graphql schema. Think of
-  // it like the site has a built-in database constructed
-  // from the fetched data that you can run queries against.
-  return graphql(
-    `
-      {
-        allContentfulProofOfProcess(limit: 1000) {
-          edges {
-            node {
-              id
-              slug
+
+  return new Promise((resolve, reject) => {
+    const blogPost = path.resolve("./src/templates/blog-post.js")
+    const tagTemplate = path.resolve("src/templates/tags.js")
+
+    resolve(
+      graphql(
+        `
+          {
+            allContentfulBlogPost {
+              edges {
+                node {
+                  title
+                  slug
+                }
+              }
+            }
+            tagsGroup: allMarkdownRemark(limit: 2000) {
+              group(field: frontmatter___tags) {
+                fieldValue
+              }
             }
           }
+        `
+      ).then(result => {
+        if (result.errors) {
+          console.log(result.errors)
+          reject(result.errors)
         }
-      }
-    `
-  ).then(result => {
-    if (result.errors) {
-      throw result.errors
-    }
-    console.log(result)
-    // Create  pages
-    const popTemplate = path.resolve(`./src/templates/pop-section.js`)
-    // We want to create a detailed page for each
-    // section node. We'll just use the Contentful id for the slug.
-    _.each(result.data.allContentfulProofOfProcess.edges, edge => {
-      // Gatsby uses Redux to manage its internal state.
-      // Plugins and sites can use functions like "createPage"
-      // to interact with Gatsby.
-      createPage({
-        // Each page is required to have a `path` as well
-        // as a template component. The `context` is
-        // optional but is often necessary so the template
-        // can query data specific to each page.
-        path: `/proof-of-process/${edge.node.slug}/`,
-        component: slash(popTemplate),
-        context: {
-          id: edge.node.id,
-        },
+
+        const posts = result.data.allContentfulBlogPost.edges
+        posts.forEach(post => {
+          createPage({
+            path: `/blog/${post.node.slug}/`,
+            component: blogPost,
+            context: {
+              slug: post.node.slug,
+            },
+          })
+        })
+
+        // Extract tag data from query
+        const tags = result.data.tagsGroup.group
+        tags.forEach(tag => {
+          createPage({
+            path: `/blog/tags/${_.kebabCase(tag.fieldValue)}/`,
+            component: tagTemplate,
+            context: {
+              tag: tag.fieldValue,
+            },
+          })
+        })
       })
-    })
+    )
   })
 }

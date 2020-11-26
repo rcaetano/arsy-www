@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import * as PropTypes from "prop-types"
-import Img from "gatsby-image"
+// import Img from "gatsby-image"
 import Layout from "../components/layout"
 
 const propTypes = {
@@ -36,7 +36,7 @@ class POPTemplate extends React.Component {
 
   render() {
     const section = this.props.data.contentfulProofOfProcess
-    const { title, body, slug, prevSection, nextSection } = section
+    const { title, body, prevSection, nextSection } = section
     return (
       <Layout>
         <Link to="/proof-of-process" className={'float-right pt-3'}>Table of Contents</Link>

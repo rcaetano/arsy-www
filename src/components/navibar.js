@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
-import style from "../pages/style.css"
+//import style from "../pages/style.css"
 import logo from "../images/arsy-sig-knot.png"
 
 const Navibar = ({ location, title }) => {
